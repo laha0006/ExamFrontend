@@ -1,13 +1,20 @@
 import renderHome from "./home.js";
+import renderDeliveries from "./deliveries/deliveries.js";
+import initDeliveries from "./deliveries/initDeliveries.js";
 
-function router(path) {
+async function router(path) {
+    console.log("ROUTED PATH: " + path);
     const app = document.getElementById('app');
     switch (path) {
         case '/':
-            app.innerHTML = renderHome();
+            // app.innerHTML = renderHome();
+            app.innerHTML = await renderDeliveries();
+            initDeliveries();
             break;
 
-        case '/test':
+        case '/deliveries':
+            app.innerHTML = renderDeliveries();
+            initDeliveries();
             break;
 
         case '/tested':
