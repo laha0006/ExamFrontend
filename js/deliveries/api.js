@@ -13,13 +13,13 @@ export async function createDrone() {
     let response = await fetch("http://localhost:8080/api/v1/drones/add");
 }
 
-export async function scheduleDrone(deliveryId) {
-    let options = makeOption("POST",{deliveryId: deliveryId});
+export async function scheduleDrone(scheduleRequest) {
+    let options = makeOption("POST",scheduleRequest);
     let response = await fetch("http://localhost:8080/api/v1/deliveries/schedule",options);
 }
 
 export async function finishDelivery(deliveryId) {
-    let response = await fetch("http://localhost:8080/api/v1/deliveries/"+deliveryId+"/finish");
+    let response = await fetch("http://localhost:8080/api/v1/deliveries/finish?id="+deliveryId);
 }
 
 export async function getPizzas() {
@@ -31,3 +31,4 @@ export async function createDelivery(delivery) {
     let options = makeOption("POST",delivery);
     let response = await fetch("http://localhost:8080/api/v1/deliveries/add", options);
 }
+

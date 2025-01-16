@@ -1,9 +1,9 @@
-import {deliveryModal} from "./modals.js";
+import {deliveryModal, droneModal} from "./modals.js";
 
 
 export default async function renderDeliveries() {
     return `<h1>deliveries page </h1>
-<table class="table">
+<table class="table text-center align-middle">
     <thead>
         <tr>
         <td>Id</td>
@@ -11,6 +11,7 @@ export default async function renderDeliveries() {
         <td>Pizza</td>
         <td>Address</td>
         <td>Drone</td>
+        <td>#</td>
         </tr>
     </thead>
     <tbody id="deliveries-table-body">
@@ -18,5 +19,5 @@ export default async function renderDeliveries() {
 </table>
 <button id="createDroneBtn" class="btn btn-primary">Create Drone</button>
 <button id="createDeliveryBtn" class="btn btn-primary">Create Delivery</button>
-<a href="/" data-link>Go home</a> ${await deliveryModal()}`;
+<a href="/" data-link>Go home</a> ${await deliveryModal()}${await droneModal()}`;
 }

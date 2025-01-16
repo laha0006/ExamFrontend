@@ -1,4 +1,7 @@
-export default function renderHome() {
-    return `<h1>HOME PAGE</h1>
-<a href="/deliveries" data-link>Go to deliveries</a>`;
+import renderDeliveries from "./deliveries/deliveries.js"
+import renderDrones from "./drones/drones.js";
+
+export default async function renderHome() {
+    return `${await renderDeliveries()}
+    ${await renderDrones()}`;
 }
