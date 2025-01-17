@@ -17,7 +17,7 @@ export async function deliveryModal() {
                 <input id="inputAddress" type="text" class="form-control" placeholder="Address" required>
             </div>
             <div class="mb-3">            
-                <label for="inputPizza" class="form-label">Boat Type</label>
+                <label for="inputPizza" class="form-label">Pizza</label>
                 <select id="inputPizza" class="form-select" aria-label="Pizza Selection" required>
                     ${await makeOptions()}
                 </select>
