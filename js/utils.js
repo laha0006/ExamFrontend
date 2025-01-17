@@ -29,3 +29,22 @@ export async function handleHttpErrors(res) {
         showErrorAlert(errorDto.errorMessage);
     }
 }
+
+
+export function timeStampConverter(timestamp) {
+    const cleanTimestamp = timestamp.split(".")[0] + "Z";
+    const date = new Date(cleanTimestamp);
+
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hourCycle: 'h23',
+      timeZone: 'UTC'
+    };
+    return date.toLocaleString('en-US', options);
+}
+

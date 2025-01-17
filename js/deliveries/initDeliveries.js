@@ -9,6 +9,8 @@ import {
     createDelivery
 } from "./api.js";
 
+import {timeStampConverter} from "../utils.js"
+
 let intervalSet = false
 let handlersSet = false
 
@@ -149,8 +151,8 @@ function makeCompletedRows() {
     const rows = completed.map(cd => `
     <tr>
     <td>${cd.id}</td>
-    <td>${cd.estimatedDeliveryTime}</td>
-    <td>${cd.actualDeliveryTime}</td>
+    <td>${timeStampConverter(cd.estimatedDeliveryTime)}</td>
+    <td>${timeStampConverter(cd.actualDeliveryTime)}</td>
     <td>${cd.address}</td>
     <td>${cd.pizza.title}</td>
     <td>${cd.drone ? cd.drone.id : '???'}</td>
@@ -166,7 +168,7 @@ function makeRows() {
     const rows = deliveries.map(d => `
     <tr>
         <td>${d.id}</td>
-        <td>${d.estimatedDeliveryTime}</td>
+        <td>${timeStampConverter(d.estimatedDeliveryTime)}</td>
         <td>${d.pizza.title}</td>
         <td>${d.address}</td>
         <td>${d.drone ? d.drone.id :
