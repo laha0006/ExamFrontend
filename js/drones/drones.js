@@ -7,6 +7,7 @@ export default async function renderDrones() {
 <td>UUID</td>
 <td>Status</td>
 <td>Station ID</td>
+<td>#</td>
 </tr>
 </thead>
 <tbody id="dronesTableBody"></tbody>

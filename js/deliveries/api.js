@@ -1,6 +1,7 @@
 import {handleHttpErrors, makeOption} from "../utils.js";
 
 export let deliveries = []
+export let completed = []
 
 export async function fetchDeliveries() {
     try {
@@ -56,6 +57,17 @@ export async function createDelivery(delivery) {
     try {
         let response = await fetch("http://localhost:8080/api/v1/deliveries/add", options);
         await handleHttpErrors(response);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+export async function fetchCompletedDeliveries() {
+    try {
+        let response = await fetch("http://localhost:8080/api/v1/deliveries/completed");
+        await handleHttpErrors(response);
+        completed = await response.json();
     } catch (error) {
         console.error(error);
     }

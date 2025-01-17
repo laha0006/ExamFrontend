@@ -1,14 +1,46 @@
-import {deliveries, fetchDeliveries, createDrone, scheduleDrone, finishDelivery, createDelivery} from "./api.js";
+import {
+    deliveries,
+    completed,
+    fetchCompletedDeliveries,
+    fetchDeliveries,
+    createDrone,
+    scheduleDrone,
+    finishDelivery,
+    createDelivery
+} from "./api.js";
 
-
+let intervalSet = false
+let handlersSet = false
 
 export default async function initDeliveries() {
-    setupHandlers()
+    setupHandlers();
+    await fetchAndUpdateDeliveries();
+    if (!intervalSet) {
+        intervalSet = true;
+        setInterval(fetchAndUpdateDeliveries, 60000)
+    }
+}
+
+
+export async function initCompletedDeliveries() {
+    setupCompletedHandlers()
+    await fetchCompletedDeliveries();
+    makeCompletedRows()
+
+}
+
+async function fetchAndUpdateDeliveries() {
+    console.log("##### fetchAndUpdateDeliveries #######");
     await fetchDeliveries();
     makeRows();
 }
 
+function setupCompletedHandlers() {
+
+}
+
 function setupHandlers() {
+    console.log("####################### SETUP #################")
     document.getElementById("createDroneBtn").addEventListener("click", async () => {
         await createDrone()
         console.log("drone created");
@@ -37,8 +69,7 @@ async function handleDroneModalSubmit(e) {
     }
 
     await scheduleDrone(scheduleRequest);
-    await fetchDeliveries();
-    makeRows();
+    await fetchAndUpdateDeliveries();
 
     const modal = document.getElementById("droneModal");
     const bootstrapModal = bootstrap.Modal.getInstance(modal);
@@ -63,8 +94,7 @@ async function handleModalSubmit(e) {
     }
 
     await createDelivery(delivery);
-    await fetchDeliveries();
-    makeRows();
+    await fetchAndUpdateDeliveries();
 
     console.log("delivery v");
     console.log(delivery);
@@ -101,8 +131,7 @@ async function handleDeliveryTableClick(e) {
             option: "SMART"
         }
         await scheduleDrone(scheduleRequest);
-        await fetchDeliveries();
-        makeRows();
+        await fetchAndUpdateDeliveries();
     }
     if (target.dataset.scheduleManualId) {
         showDroneModal(target.dataset.scheduleManualId);
@@ -111,9 +140,23 @@ async function handleDeliveryTableClick(e) {
     if (target.dataset.finishId) {
         const id = target.dataset.finishId
         await finishDelivery(id);
-        await fetchDeliveries();
-        makeRows();
+        await fetchAndUpdateDeliveries();
     }
+}
+
+function makeCompletedRows() {
+    const completedTableBody = document.getElementById('completeDeliveriesTableBody');
+    const rows = completed.map(cd => `
+    <tr>
+    <td>${cd.id}</td>
+    <td>${cd.estimatedDeliveryTime}</td>
+    <td>${cd.actualDeliveryTime}</td>
+    <td>${cd.address}</td>
+    <td>${cd.pizza.title}</td>
+    <td>${cd.drone ? cd.drone.id : '???'}</td>
+</tr>
+    `)
+    completedTableBody.innerHTML = rows.join("");
 }
 
 function makeRows() {
@@ -126,8 +169,8 @@ function makeRows() {
         <td>${d.estimatedDeliveryTime}</td>
         <td>${d.pizza.title}</td>
         <td>${d.address}</td>
-        <td>${d.drone ? d.drone.id : 
-        '<button data-schedule-manual-id="'+ d.id + '" class="btn btn-warning fw-bolder">Manual Assign</button> <button data-schedule-id="'+ d.id + '" class="btn btn-warning fw-bolder">Smart Assign</button>' }</td>
+        <td>${d.drone ? d.drone.id :
+        '<button data-schedule-manual-id="' + d.id + '" class="btn btn-warning fw-bolder">Manual Assign</button> <button data-schedule-id="' + d.id + '" class="btn btn-warning fw-bolder">Smart Assign</button>'}</td>
         <td><button data-finish-id="${d.id}" class="btn btn-success my-btn">Finish Delivery</button></td>
     <tr>
     `);
