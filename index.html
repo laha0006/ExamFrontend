@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
     <script src="js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
@@ -23,19 +24,31 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/drones" data-link>Drones</a>
                     </li>
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link" href="#">Pricing</a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>-->
-<!--                    </li>-->
+                    <!--                    <li class="nav-item">-->
+                    <!--                        <a class="nav-link" href="#">Pricing</a>-->
+                    <!--                    </li>-->
+                    <!--                    <li class="nav-item">-->
+                    <!--                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>-->
+                    <!--                    </li>-->
                 </ul>
             </div>
         </div>
     </nav>
+    <div class="alert alert-danger alert-dismissible fade show position-fixed top-8 start-50 translate-middle-x" role="alert" id="error-alert" style="display: none;">
+        <strong>Error!</strong> <span id="error-message">You cannot finish a delivery without a drone!</span>
+        <button type="button" class="btn-close" onclick="hideErrorAlert()" aria-label="Close"></button>
+    </div>
     <main id="app">
+
     </main>
 </div>
+<script>
+    function hideErrorAlert() {
+        const alertBox = document.getElementById("error-alert");
+        alertBox.style.display = "none";  // Hide the alert
+        alertBox.classList.remove("show"); // Remove Bootstrap's `show` class
+    }
+</script>
 <script type="module" src="./js/main.js"></script>
 </body>
 </html>

@@ -17,7 +17,7 @@ export default async function renderDeliveries() {
     <tbody id="deliveries-table-body">
     </tbody>
 </table>
-<button id="createDroneBtn" class="btn btn-primary">Create Drone</button>
-<button id="createDeliveryBtn" class="btn btn-primary">Create Delivery</button>
-<a href="/" data-link>Go home</a> ${await deliveryModal()}${await droneModal()}`;
+<button id="createDroneBtn" class="btn btn-primary my-btn">Create Drone</div></button>
+<button id="createDeliveryBtn" class="btn btn-primary my-btn">Create Delivery</button>
+${await deliveryModal()}${await droneModal()}`;
 }

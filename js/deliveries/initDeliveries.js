@@ -128,7 +128,7 @@ function makeRows() {
         <td>${d.address}</td>
         <td>${d.drone ? d.drone.id : 
         '<button data-schedule-manual-id="'+ d.id + '" class="btn btn-warning fw-bolder">Manual Assign</button> <button data-schedule-id="'+ d.id + '" class="btn btn-warning fw-bolder">Smart Assign</button>' }</td>
-        <td><button data-finish-id="${d.id}" class="btn btn-success fw-bolder">Finish Delivery</button></td>
+        <td><button data-finish-id="${d.id}" class="btn btn-success my-btn">Finish Delivery</button></td>
     <tr>
     `);
     console.log("rows")

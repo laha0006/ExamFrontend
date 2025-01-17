@@ -1,0 +1,17 @@
+body {
+    background-color: #171717;
+}
+
+.my-btn {
+    font-weight: bolder;
+    color: black;
+}
+
+#app {
+    text-align: center;
+}
+
+
+/*.btn > div {*/
+/*    color: red;*/
+/*}*/

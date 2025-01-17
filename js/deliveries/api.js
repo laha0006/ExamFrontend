@@ -1,34 +1,63 @@
-import {makeOption} from "../utils.js";
+import {handleHttpErrors, makeOption} from "../utils.js";
 
 export let deliveries = []
 
 export async function fetchDeliveries() {
-    let response = await fetch("http://localhost:8080/api/v1/deliveries");
-    deliveries = await response.json();
-    console.log(deliveries);
+    try {
+        let response = await fetch("http://localhost:8080/api/v1/deliveries");
+        await handleHttpErrors(response);
+        deliveries = await response.json();
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 
 export async function createDrone() {
-    let response = await fetch("http://localhost:8080/api/v1/drones/add");
+    try {
+        let response = await fetch("http://localhost:8080/api/v1/drones/add");
+        await handleHttpErrors(response);
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 export async function scheduleDrone(scheduleRequest) {
     let options = makeOption("POST",scheduleRequest);
-    let response = await fetch("http://localhost:8080/api/v1/deliveries/schedule",options);
+    try {
+        let response = await fetch("http://localhost:8080/api/v1/deliveries/schedule",options);
+        await handleHttpErrors(response);
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 export async function finishDelivery(deliveryId) {
-    let response = await fetch("http://localhost:8080/api/v1/deliveries/finish?id="+deliveryId);
+    try {
+        let response = await fetch("http://localhost:8080/api/v1/deliveries/finish?id="+deliveryId);
+        await handleHttpErrors(response);
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 export async function getPizzas() {
-    let response = await fetch("http://localhost:8080/api/v1/pizzas");
-    return await response.json();
+    try {
+        let response = await fetch("http://localhost:8080/api/v1/pizzas");
+        await handleHttpErrors(response);
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 export async function createDelivery(delivery) {
     let options = makeOption("POST",delivery);
-    let response = await fetch("http://localhost:8080/api/v1/deliveries/add", options);
+    try {
+        let response = await fetch("http://localhost:8080/api/v1/deliveries/add", options);
+        await handleHttpErrors(response);
+    } catch (error) {
+        console.error(error);
+    }
 }
 
