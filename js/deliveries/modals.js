@@ -37,9 +37,9 @@ export async function deliveryModal() {
 
 async function makeOptions() {
     let pizzas = await getPizzas();
-    console.log(pizzas);
+    // console.log(pizzas);
     let options = pizzas.map(p => `<option value="${p.id}">${p.title} ${p.price}.-</option>`);
-    console.log(options)
+    // console.log(options)
     return options.join("");
 }
 

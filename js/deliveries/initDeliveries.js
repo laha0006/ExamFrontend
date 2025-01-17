@@ -40,10 +40,10 @@ function setupCompletedHandlers() {
 }
 
 function setupHandlers() {
-    console.log("####################### SETUP #################")
+    // console.log("####################### SETUP #################")
     document.getElementById("createDroneBtn").addEventListener("click", async () => {
         await createDrone()
-        console.log("drone created");
+        // console.log("drone created");
     })
     document.getElementById("deliveries-table-body").onclick = handleDeliveryTableClick;
     document.getElementById("createDeliveryBtn").onclick = showModal;
@@ -53,7 +53,7 @@ function setupHandlers() {
 
 async function handleDroneModalSubmit(e) {
     e.preventDefault();
-    console.log("HANDLE DRONE MODAL SUBMIT")
+    // console.log("HANDLE DRONE MODAL SUBMIT")
     const droneModal = document.getElementById('droneModalForm');
     if (!droneModal.checkValidity()) {
         droneModal.reportValidity();
@@ -96,8 +96,8 @@ async function handleModalSubmit(e) {
     await createDelivery(delivery);
     await fetchAndUpdateDeliveries();
 
-    console.log("delivery v");
-    console.log(delivery);
+    // console.log("delivery v");
+    // console.log(delivery);
 
     const modal = document.getElementById("deliveryModal");
     const bootstrapModal = bootstrap.Modal.getInstance(modal);
@@ -160,8 +160,8 @@ function makeCompletedRows() {
 }
 
 function makeRows() {
-    console.log("make rows")
-    console.log(deliveries);
+    // console.log("make rows")
+    // console.log(deliveries);
     const deliveriesTableBody = document.getElementById("deliveries-table-body");
     const rows = deliveries.map(d => `
     <tr>
@@ -174,8 +174,8 @@ function makeRows() {
         <td><button data-finish-id="${d.id}" class="btn btn-success my-btn">Finish Delivery</button></td>
     <tr>
     `);
-    console.log("rows")
-    console.log(rows)
+    // console.log("rows")
+    // console.log(rows)
 
     deliveriesTableBody.innerHTML = rows.join("");
 }
